@@ -1,4 +1,6 @@
-# Markov Chainsaw Massacre
+# Final Project
+
+This Repository contains code to run Probabilistic Model Checking using the Prism Model Checker. It contains two traffic scenarios modeled as Markov Decision Processes (MDPs) along with some LTL specifications for overall system behavior.
 
 Ways to run the code in this repo
 1. Running code in VSCode
