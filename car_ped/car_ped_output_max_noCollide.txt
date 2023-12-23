@@ -1,0 +1,85 @@
+root@8bc725441c97:/workspaces/applied-formal-methods-final-project-markov-chainsaw-massacre/car_ped# prism car_ped_parallelcomposition_auto.prism -pf 'Pmax=? [ G (!(c=3&p=3)) ]' -expor
+tstrat stdout
+PRISM
+=====
+
+Version: 4.8
+Date: Wed Dec 13 02:32:50 GMT 2023
+Hostname: 8bc725441c97
+Memory limits: cudd=1g, java(heap)=1g
+Command line: prism car_ped_parallelcomposition_auto.prism -pf 'Pmax=? [ G (!(c=3&p=3)) ]' -exportstrat stdout
+
+Parsing model file "car_ped_parallelcomposition_auto.prism"...
+
+Type:        MDP
+Modules:     the_mdp the_mc
+Variables:   c p
+
+1 property:
+(1) Pmax=? [ G (!(c=3&p=3)) ]
+
+---------------------------------------------------------------------
+
+Model checking: Pmax=? [ G (!(c=3&p=3)) ]
+
+Warning: Switching to explicit engine to allow strategy generation.
+
+Building model...
+
+Computing reachable states... 25 states
+Reachable states exploration and model construction done in 0.013 secs.
+Sorting reachable states list...
+
+Time for model construction: 0.03 seconds.
+
+Type:        MDP
+States:      25 (1 initial)
+Transitions: 162
+Choices:     50
+Max/avg:     2/2.00
+
+Starting probabilistic reachability (min)...
+Starting Prob0 (min)...
+Prob0 (min) took 3 iterations and 0.002 seconds.
+Starting Prob1 (min)...
+Prob1 (min) took 8 iterations and 0.001 seconds.
+target=1, yes=1, no=16, maybe=8
+Starting value iteration (min, with Power method)...
+Value iteration (min, with Power method) took 33 iterations, 2112 multiplications and 0.004 seconds.
+Probabilistic reachability took 0.022 seconds.
+
+Value in the initial state: 0.8867584853848612
+
+Time for model checking: 0.034 seconds.
+
+Result: 0.8867584853848612 (+/- 6.15606330262318E-6 estimated; rel err 6.942209636653652E-6)
+
+Exporting strategy as actions below:
+(1,1):accelerate
+(1,2):brake
+(1,3):brake
+(1,4):brake
+(1,5):brake
+(2,1):accelerate
+(2,2):brake
+(2,3):brake
+(2,4):brake
+(2,5):brake
+(3,1):accelerate
+(3,2):accelerate
+(3,4):brake
+(3,5):brake
+(4,1):brake
+(4,2):brake
+(4,3):brake
+(4,4):brake
+(4,5):brake
+(5,1):brake
+(5,2):brake
+(5,3):brake
+(5,4):brake
+(5,5):brake
+
+---------------------------------------------------------------------
+
+Note: There was 1 warning during computation.

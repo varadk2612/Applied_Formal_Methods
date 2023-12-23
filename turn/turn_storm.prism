@@ -1,0 +1,113 @@
+mdp
+    // aircraft a
+    // turning aircraft (with probabilistic storm @ a4)
+    module turner
+
+
+    // position of turning aircraft
+    a : [1..6] init 1;
+
+    // speed of turning aircraft
+    //  0 : slow
+    //  1 : fast
+    fast : [0..1] init 1;
+
+    //  actions:
+    //      go   : move ahead
+    //      slow : reduce speed (only possible when fast=1)
+    //      acc  : increase speed (only possible when fast=0)
+    //      turn : change trajectory (only possible when fast=0)
+
+    [go] fast = 1 & a != 6 & a != 4 -> 
+                                        .8:     (a'=a+1) & (fast'=1) + 
+                                        .1:     (a'=a)   & (fast'=1) +
+                                        .08:    (a'=a+1) & (fast'=0) +
+                                        .02:    (a'=a)   & (fast'=0);
+
+
+    [go] fast = 0 & a != 6 & a != 4 ->
+                                        .5:     (a'=a+1) & (fast'=0) +
+                                        .4:     (a'=a)   & (fast'=0) +
+                                        .09:    (a'=a)   & (fast'=1) +
+                                        .01:    (a'=a+1) & (fast'=1);
+
+    [slow] fast = 1 & a != 6 & a != 4 ->
+                                        .7:     (a'=a+1) & (fast'=0) +
+                                        .2:     (a'=a)   & (fast'=0) +
+                                        .09:    (a'=a+1) & (fast'=1) +
+                                        .01:    (a'=a)   & (fast'=1);
+
+    [acc] fast = 0 & a != 6 & a != 4 ->
+                                        .7:     (a'=a+1) & (fast'=1) +
+                                        .2:     (a'=a)   & (fast'=1) +
+                                        .08:    (a'=a)   & (fast'=0) +
+                                        .02:    (a'=a+1) & (fast'=0);
+
+    [turn] fast = 0 & a = 3 ->
+                                .9:     (a'=5)   & (fast'=0) +
+                                .1:     (a'=a+1) & (fast'=0);
+
+    [go] a = 6 | a = 4 ->
+                            1: (a'=a) & (fast'=fast);    
+
+    [slow] a = 6 | a = 4 ->
+                            1: (a'=a) & (fast'=fast);
+
+    [acc] a = 6 | a = 4 ->
+                            1: (a'=a) & (fast'=fast);
+
+    endmodule
+
+
+    // aircraft b
+    module straight
+
+    // position of aircraft b
+    b : [1..5] init 1;
+
+    // actions defined here to synchronize with turning aircraft
+
+    [go]   b < 5 -> 0.7:(b'=b) + 0.3:(b'=b+1);
+    [go]   b = 5 -> 1:(b'=b);
+
+    [slow] b < 5 -> 0.7:(b'=b) + 0.3:(b'=b+1);
+    [slow] b = 5 -> 1:(b'=b);
+
+    [acc]  b < 5 -> 0.7:(b'=b) + 0.3:(b'=b+1);
+    [acc]  b = 5 -> 1:(b'=b);
+
+    [turn] b < 5 -> 0.7:(b'=b) + 0.3:(b'=b+1);
+    [turn] b = 5 -> 1:(b'=b);
+
+    endmodule
+
+
+
+    module storm
+
+    // presence of storm in cell a4
+    //  -1 : initial
+    //  0 : no storm
+    //  1 : storm
+    s : [-1..1] init -1;
+
+    // actions defined here to synchronize with turning aircraft
+
+    [go]   s = -1 -> 0.5:(s'=0) + 0.5:(s'=1);
+    [go]   s = 0 -> 1:(s'=0);
+    [go]   s = 1 -> 1:(s'=1);
+
+    [slow] s = -1 -> 0.5:(s'=0) + 0.5:(s'=1);
+    [slow] s = 0 -> 1:(s'=0);
+    [slow] s = 1 -> 1:(s'=1);
+
+    [acc]  s = -1 -> 0.5:(s'=0) + 0.5:(s'=1);
+    [acc]  s = 0 -> 1:(s'=0);
+    [acc]  s = 1 -> 1:(s'=1);
+
+    [acc]  s = -1 -> 0.5:(s'=0) + 0.5:(s'=1);
+    [acc]  s = 0 -> 1:(s'=0);
+    [acc]  s = 1 -> 1:(s'=1);
+
+    endmodule
+

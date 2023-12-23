@@ -1,0 +1,38 @@
+Pmax=? [ G !(a=5 & b=4) & (F (a=6 | (a=4 & s=0))) ]
+
+Pmax=? [ G !(a=5 & b=4) & (s=0 => (F (a=4))) & (s=1 => (F (a=6))) ]
+
+
+
+
+Pmax=? [ G !(a=5 & b=4) & 
+            (((s=0) | (s=1 & a=3 & b=4))   => (F (a=4))) & 
+                     ((s=1 & a!=3 & b!=4) => (F (a=6))) ]
+
+// same as above, just on one line
+Pmax=? [ G !(a=5 & b=4) & (((s=0) | (s=1 & a=3 & b=4)) => (F (a=4))) & ((s=1 & a!=3 & b!=4) => (F (a=6))) ]
+
+
+
+
+Pmax=? [ G !(a=5 & b=4) &
+            (s=0 => (F(a=4))) &
+           ((s=1 => (F(a=6))) W (a=3 & b=4)) &
+            (((a=3 & b=4) => (F(a=4))) W (!(a=3 & b=4)))
+        ]
+
+// same as above, just on one line
+Pmax=? [ G !(a=5 & b=4) & (s=0 => (F(a=4))) & ((s=1 => (F(a=6))) W (a=3 & b=4)) & (((a=3 & b=4) => (F(a=4))) W (!(a=3 & b=4)))]
+
+
+
+// changing imm_coll to possible_collision (b has not passed intersection)
+
+Pmax=? [ G !(a=5 & b=4) &
+            (s=0 => (F(a=4))) &
+            ((s=1 & b=5) => (F(a=6))) &
+            (((s=1 & b<5) => (F(a=4))) U (b=5))
+        ]
+
+// same as above, just on one line
+Pmax=? [ G (!(a=5 & b=4) & (s=0 => (F(a=4))) & ((s=1 & b=5) => (F(a=6))) & (((s=1 & b<5) => (F(a=4))) U (b=5)))]

@@ -1,0 +1,10 @@
+dtmc
+
+    module car_ped_mc
+
+    p [1..5] init 1;
+
+    [] p < 5 -> 0.7:(p'=p) + 0.3 : (p'=p+1);
+    [] p = 5 -> (p'=p);
+
+    endmodule

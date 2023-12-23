@@ -1,0 +1,24 @@
+mdp
+
+module the_mdp
+
+    c : [1..5] init 1;
+
+    [accelerate] c < 5 -> 0.9:(c'=c+1) + 0.1 : (c'=c);
+    [brake]      c < 5 -> 0.8:(c'=c) + 0.2 : (c'=c+1);
+    [accelerate] c = 5 -> 1:(c'=c);
+    [brake]      c = 5 -> 1:(c'=c); 
+
+endmodule
+
+module the_mc
+
+    p : [1..5] init 1;
+
+    [accelerate] p < 5 -> 0.7:(p'=p) + 0.3 : (p'=p+1);
+    [accelerate] p = 5 -> (p'=p);
+
+    [brake] p < 5 -> 0.7:(p'=p) + 0.3 : (p'=p+1);
+    [brake] p = 5 -> (p'=p);
+
+endmodule

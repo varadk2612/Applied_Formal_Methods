@@ -1,0 +1,205 @@
+PRISM
+=====
+
+Version: 4.8
+Date: Tue Dec 12 22:40:58 GMT 2023
+Hostname: 8bc725441c97
+Memory limits: cudd=1g, java(heap)=1g
+Command line: prism turn/turn_storm.prism -pf 'Pmax=? [ G !(a=5 & b=4) & (s=0 => (F(a=4))) & ((s=1 => (F(a=6))) W (a=3 & b=4)) & (((a=3 & b=4) => (F(a=4))) W (!(a=3 & b=4)))]' -exportstrat stdout
+
+Parsing model file "turn/turn_storm.prism"...
+
+Type:        MDP
+Modules:     turner straight storm
+Variables:   a fast b s
+
+1 property:
+(1) Pmax=? [ G !(a=5&b=4)&(s=0=>(F (a=4)))&((s=1=>(F (a=6))) W (a=3&b=4))&(((a=3&b=4)=>(F (a=4))) W (!(a=3&b=4))) ]
+
+---------------------------------------------------------------------
+
+Model checking: Pmax=? [ G !(a=5&b=4)&(s=0=>(F (a=4)))&((s=1=>(F (a=6))) W (a=3&b=4))&(((a=3&b=4)=>(F (a=4))) W (!(a=3&b=4))) ]
+
+Warning: Switching to explicit engine to allow strategy generation.
+
+Building model...
+
+Computing reachable states... 121 states
+Reachable states exploration and model construction done in 0.047 secs.
+Sorting reachable states list...
+
+Time for model construction: 0.078 seconds.
+
+Type:        MDP
+States:      121 (1 initial)
+Transitions: 1436
+Choices:     292
+Max/avg:     3/2.41
+
+Building deterministic automaton (for G "L0"&("L1"=>(F "L2"))&(("L3"=>(F "L4")) W "L5")&(("L5"=>(F "L2")) W !"L5"))...
+DRA has 40 states, 2 Rabin pairs.
+Time for DRA translation: 0.189 seconds.
+Constructing MDP-DRA product...
+Time for product construction: 0.014 seconds, product has 197 states (1 initial), 2140 transitions, 490 choices, dist max/avg = 3/2.49.
+
+Finding accepting MECs...
+
+Computing reachability probabilities...
+
+Starting probabilistic reachability (max)...
+Starting Prob0 (max)...
+Prob0 (max) took 6 iterations and 0.003 seconds.
+Starting Prob1 (max)...
+Prob1 (max) took 26 iterations and 0.01 seconds.
+target=8, yes=82, no=54, maybe=61
+Starting value iteration (max, with Power method)...
+Value iteration (max, with Power method) took 24 iterations, 23280 multiplications and 0.01 seconds.
+Probabilistic reachability took 0.033 seconds.
+
+Value in the initial state: 0.8827992733224497
+
+Time for model checking: 0.28 seconds.
+
+Result: 0.8827992733224497 (+/- 4.538182415875478E-6 estimated; rel err 5.140673030683239E-6)
+
+Exporting strategy as actions below:
+(1,1,1,-1),28:slow
+(1,0,1,0),2:go
+(1,0,1,1),12:acc
+(1,0,2,0),2:go
+(1,0,2,1),12:acc
+(1,1,1,0),2:go
+(1,1,1,1),12:slow
+(1,1,2,0),2:go
+(1,1,2,1),12:go
+(2,0,1,0),2:go
+(2,0,1,1),12:go
+(2,0,2,0),2:go
+(2,0,2,1),12:go
+(2,1,1,0),2:go
+(2,1,1,1),12:slow
+(2,1,2,0),2:go
+(2,1,2,1),12:slow
+(1,0,1,1),34:acc
+(1,0,2,1),34:acc
+(1,1,1,1),34:slow
+(1,1,2,1),34:go
+(2,0,1,1),34:go
+(2,0,2,1),34:go
+(2,1,1,1),34:slow
+(2,1,2,1),34:slow
+(1,0,3,0),2:go
+(1,1,3,0),2:go
+(2,0,3,0),2:go
+(2,1,3,0),2:go
+(1,0,3,1),34:go
+(1,1,3,1),34:slow
+(2,0,3,1),34:go
+(2,1,3,1),34:slow
+(3,0,1,0),2:go
+(3,0,2,0),2:go
+(3,1,1,0),2:go
+(3,1,2,0),2:go
+(3,0,1,1),34:turn
+(3,0,2,1),34:turn
+(3,1,1,1),34:slow
+(3,1,2,1),34:slow
+(3,0,3,0),2:go
+(3,1,3,0),2:go
+(3,0,3,1),34:turn
+(3,1,3,1),34:slow
+(1,0,1,1),22:acc
+(1,0,2,1),22:acc
+(1,1,1,1),22:slow
+(1,1,2,1),22:go
+(2,0,1,1),22:go
+(2,0,2,1),22:go
+(2,1,1,1),22:slow
+(2,1,2,1),22:slow
+(1,0,3,1),22:go
+(1,1,3,1),22:slow
+(2,0,3,1),22:go
+(2,1,3,1),22:slow
+(3,0,1,1),22:turn
+(3,0,2,1),22:turn
+(3,1,1,1),22:slow
+(3,1,2,1),22:slow
+(3,0,3,1),22:turn
+(3,1,3,1),22:slow
+(1,0,4,0),2:go
+(1,1,4,0),2:go
+(2,0,4,0),2:go
+(2,1,4,0),2:go
+(3,0,4,0),2:go
+(3,1,4,0),2:go
+(1,0,4,1),22:go
+(1,1,4,1),22:slow
+(2,0,4,1),22:go
+(2,1,4,1),22:slow
+(4,0,1,0),11:go
+(4,0,2,0),11:go
+(4,1,1,0),11:go
+(4,1,2,0),11:go
+(4,0,3,0),11:go
+(4,1,3,0),11:go
+(5,0,1,1),22:acc
+(5,0,2,1),22:acc
+(5,0,3,1),22:acc
+(4,0,4,0),11:go
+(4,1,4,0),11:go
+(1,0,5,0),2:go
+(1,1,5,0),2:go
+(2,0,5,0),2:go
+(2,1,5,0),2:go
+(3,0,5,0),2:go
+(3,1,5,0),2:go
+(1,0,5,1),22:go
+(1,1,5,1),22:slow
+(2,0,5,1),22:go
+(2,1,5,1),22:slow
+(3,0,5,1),22:turn
+(3,1,5,1),22:slow
+(4,0,1,0),28:go
+(4,0,2,0),28:go
+(4,0,3,0),28:go
+(4,1,1,0),28:go
+(4,1,2,0),28:go
+(4,1,3,0),28:go
+(4,0,4,0),28:go
+(4,1,4,0),28:go
+(5,1,1,1),22:go
+(5,1,2,1),22:go
+(6,0,1,1),16:go
+(6,0,2,1),16:go
+(6,1,1,1),16:go
+(6,1,2,1),16:go
+(5,1,3,1),22:go
+(6,0,3,1),16:go
+(6,1,3,1),16:go
+(6,0,4,1),16:go
+(6,1,4,1),16:go
+(5,0,5,1),22:go
+(6,0,1,1),11:go
+(6,0,2,1),11:go
+(6,0,3,1),11:go
+(6,1,1,1),11:go
+(6,1,2,1),11:go
+(6,1,3,1),11:go
+(6,0,4,1),11:go
+(6,1,4,1),11:go
+(5,1,5,1),22:go
+(6,0,5,1),16:go
+(6,1,5,1),16:go
+(6,0,1,1),28:go
+(6,0,2,1),28:go
+(6,0,3,1),28:go
+(6,0,4,1),28:go
+(6,1,1,1),28:go
+(6,1,2,1),28:go
+(6,1,3,1),28:go
+(6,1,4,1),28:go
+
+---------------------------------------------------------------------
+
+Note: There was 1 warning during computation.
+

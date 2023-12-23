@@ -1,0 +1,12 @@
+mdp
+
+    module car_ped_mdp
+
+    c [1..5] init 1;
+
+    [accelerate] c < 5 -> 0.9:(c'=c+1) + 0.1 : (c'=c);
+    [brake]      c < 5 -> 0.8:(c'=c) + 0.2 : (c'=c+1);
+    [accelerate] c = 5 -> c' = c;
+    [brake]      c = 5 -> c' = c; 
+
+    endmodule
